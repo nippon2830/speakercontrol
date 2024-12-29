@@ -1,22 +1,18 @@
 #!/usr/bin/python
 #import required Python libraries
-import time, re, string, sys, array;
-import subprocess
+import subprocess,sys
+import gpio_mpc_modul as mpc
 
 
 param_url = sys.argv[1];
-program = "mpc"
-param_stop = " stop"
-param_play = " play"
-param_clear = " clear"
 
-def getUrl_parameter(param_url):
+def getUrl_parameter(url_setting):
  filepath = ('/home/pi/gpio/radio_urls.per')
  with open(filepath) as fp:
    line = fp.readline()
    cnt = 1
    while line:
-       if cnt == int(setting):
+       if cnt == int(url_setting):
         sl = line.strip()
         print("Line {}: {}".format(cnt, sl))
         return sl
@@ -24,9 +20,10 @@ def getUrl_parameter(param_url):
         line = fp.readline()
         cnt += 1
 
-
-
 def init():
- subprocess.Popen([program]+param_play.split())
+ mpc.stop()
+ mpc.clear()
+ mpc.change(getUrl_parameter(param_url))
+ mpc.play()
 
 init();

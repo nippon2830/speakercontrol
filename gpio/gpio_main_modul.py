@@ -12,7 +12,6 @@ GPIO.setwarnings(False)
 
 print("Test GPIO");
 
-#pinListTest = [4,23];
 pinList = [18,14,15,4,3,2,17,27,23,24,10,22]; 
 pinNr = [0,1,2,3,4,5,6,7,8,9,10,11]
 pinPort = [0,1,0,1,0,1,0,1,0,1,0,1];
@@ -22,9 +21,12 @@ pinPort = [0,1,0,1,0,1,0,1,0,1,0,1];
 #|3|2|14|4|15|18|27|17|#
 #----------------------# 
 
-#highpins = []; lowpins = []; pinPort = [];
 
-speaker_set = sys.argv[1];
+speaker_set = 2;
+
+if len(sys.argv) > 1:
+    speaker_set = sys.argv[1];
+
 #stateP = sys.argv[2];
 
 # read speaker setting from params
@@ -105,17 +107,13 @@ init();
 #setPin(int(pinP),stateP)
 #setPinPort();
 
-# not used at the moment
-def initOP():
- init(pinPort); 
-
-# not used at the moment
+# used for server only
 def initIP(pinParam):
  if(len(pinParam) > 0):
   pinPort = pinParam;
  else:
   pinPort = [];
- init(pinPort); 
+ init(); 
 
 
 # not used at the moment

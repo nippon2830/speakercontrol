@@ -44,13 +44,13 @@
         <h3>Fernbedienung</h3>
         <div class="row mb-3">
             <div class="col-4">
-                <button class="btn btn-secondary btn-remote">Back</button>
+                <button class="btn btn-secondary btn-remote">play</button>
             </div>
             <div class="col-4">
                 <button class="btn btn-secondary btn-remote">*</button>
             </div>
             <div class="col-4">
-                <button class="btn btn-secondary btn-remote">Home</button>
+                <button class="btn btn-secondary btn-remote">stop</button>
             </div>
         </div>
 
@@ -98,6 +98,14 @@
 
                 $("#play").click(function () {
                     $.get(`/gpio/play`, function (data) {
+                        updateResult(data);
+                    }).fail(function (err) {
+                        updateResult(err.responseJSON);
+                    });
+                });
+
+                $("#stop").click(function () {
+                    $.get(`/gpio/stop`, function (data) {
                         updateResult(data);
                     }).fail(function (err) {
                         updateResult(err.responseJSON);

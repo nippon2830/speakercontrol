@@ -48,7 +48,7 @@ def hello():
 def init():
  gpio.initIP(db['messages']); 
 
-with closing(db): 
+#with closing(db): 
 
 if __name__ == "__main__":
  init();
