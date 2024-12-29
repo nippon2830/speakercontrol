@@ -1,0 +1,39 @@
+1 studio links
+2 waschraum
+3 schlafzimmer
+4 laras zimmer
+5 Terrasse
+6 küche
+7 studio rechts
+8 Flur
+9 Badezimmer
+10 Ida
+11 gäste wc
+12 wohnzimmer
+
+1 ohne Kinder
+2 alle
+3 nur ganz oben
+4 ohne ganz oben
+5 nicht unten
+
+
+/root/.sdkman/candidates/groovy/2.4.13/lib/
+commons-email-1.4.jar  javax.mail-1.5.2.jar
+
+https://wiki.ubuntuusers.de/Internetradio/Stationen/#Radiosender-Deutschland
+
+Startup
+sudo nano /etc/profile
+Scroll to the bottom and add the following line :
+sudo python /home/pi/gpio/gpio_main_modul.py 
+
+Reboot
+sudo crontab -e
+0 4 * * * /sbin/shutdown -r now
+
+sudo nano /etc/rc.local
+amixer -q -M sset PCM 85%
+
+https://wiki.ubuntuusers.de/mpg123/
+
