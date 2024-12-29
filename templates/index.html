@@ -1,119 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPIO Control</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <title>Digitale Fernbedienung</title>
     <style>
-        .remote-container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #333;
-            border-radius: 15px;
-            color: #fff;
-        }
-
-        .btn-remote {
-            height: 60px;
-            font-size: 18px;
-        }
-
-        .remote-center {
+        body {
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
         }
-
-        .remote-direction button {
-            margin: 5px;
-            width: 70px;
-            height: 70px;
+        .remote {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            gap: 10px;
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .button:hover {
+            background: #777;
+        }
+        .button.red {
+            background: #d9534f;
+        }
+        .button.green {
+            background: #5cb85c;
+        }
+        .button.blue {
+            background: #5bc0de;
+        }
+        .divider {
+            grid-column: span 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            background: #999;
+            color: white;
+            font-size: 14px;
+            margin: 10px 0;
+            border-radius: 5px;
         }
     </style>
 </head>
-
 <body>
-    <div class="remote-container text-center">
-        <h3>Fernbedienung</h3>
-        <div class="row mb-3">
-            <div class="col-4">
-                <button class="btn btn-secondary btn-remote">play</button>
-            </div>
-            <div class="col-4">
-                <button class="btn btn-secondary btn-remote">*</button>
-            </div>
-            <div class="col-4">
-                <button class="btn btn-secondary btn-remote">stop</button>
-            </div>
-        </div>
-
-        <div class="remote-center">
-            <div class="remote-direction">
-                <button class="btn btn-secondary btn-lg"><i>&uarr;</i></button>
-                <br>
-                <button class="btn btn-secondary btn-lg">OK</button>
-            </div>
-        </div>
-
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="result-toast" class="toast align-items-center text-bg-primary border-0" role="alert"
-                aria-live="assertive" aria-atomic="true">
-                <div class="d-flex">
-                    <div class="toast-body" id="toast-body">
-                        <!-- Dynamic content goes here -->
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                        aria-label="Close"></button>
-                </div>
-            </div>
-        </div>
-
-
-        <script>
-
-            function showToast(message, isError = false) {
-                const toastBody = $("#toast-body");
-                const resultToast = $("#result-toast");
-
-                toastBody.text(message);
-                resultToast.removeClass("text-bg-primary text-bg-danger");
-                resultToast.addClass(isError ? "text-bg-danger" : "text-bg-primary");
-
-                const toast = new bootstrap.Toast(resultToast[0]);
-                toast.show();
-            }
-
-            $(document).ready(function () {
-                function updateResult(data) {
-                    showToast(JSON.stringify(data), false);
-                }
-
-
-                $("#play").click(function () {
-                    $.get(`/gpio/play`, function (data) {
-                        updateResult(data);
-                    }).fail(function (err) {
-                        updateResult(err.responseJSON);
-                    });
-                });
-
-                $("#stop").click(function () {
-                    $.get(`/gpio/stop`, function (data) {
-                        updateResult(data);
-                    }).fail(function (err) {
-                        updateResult(err.responseJSON);
-                    });
-                });
-
-            });
-        </script>
+    <div class="remote">
+        <div class="divider">Main</div>
+        <button class="button"><a href="/gpio/play"><img src="/static/play.png" alt="play"><span style="z-index: 1;"></span></a></button>
+        <button class="button"><img src="/static/vol_down.png" alt="vol_down"><span style="z-index: 1;"></span></button>
+        <button class="button"><img src="/static/vol_up.png" alt="vol_up"><span style="z-index: 1;"></span></button>
+        <button class="button"><a href="/gpio/stop"><img src="/static/stop.png" alt="stop"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><img src="/static/prev.png" alt="prev"><span style="z-index: 1;"></span></button>
+        <button class="button"><img src="/static/next.png" alt="next"><span style="z-index: 1;"></span></button>
+		<div class="divider">Radio</div>
+        <button class="button">1</button>
+        <button class="button">2</button>
+        <button class="button">3</button>
+        <button class="button">4</button>
+        <button class="button">5</button>
+        <button class="button">6</button>
+        <div class="divider">Speaker</div>
+        <button class="button">1</button>
+        <button class="button">2</button>
+        <button class="button">3</button>
+        <button class="button">4</button>
+        <button class="button">5</button>
+        <button class="button">6</button>
+        <div class="divider">Sonstige</div>
+        <button class="button"><img src="power.png" alt="power"><span style="z-index: 1;"> </span></button>
+    </div>
 </body>
-
 </html>

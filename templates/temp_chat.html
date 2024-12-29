@@ -22,6 +22,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: max-content;
         }
         .button {
             width: 80px;
@@ -63,43 +64,72 @@
             grid-column: span 3;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             height: 30px;
-            background: #999;
+            background: var(--divider-bg-color, #999);
             color: white;
             font-size: 14px;
             margin: 10px 0;
             border-radius: 5px;
+            padding: 0 10px;
+            cursor: pointer;
+        }
+        .collapsible {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            transition: max-height 0.3s ease-out, visibility 0.3s ease-out;
+            overflow: hidden;
+        }
+        .collapsible.hidden {
+            max-height: 0;
+            visibility: hidden;
+        }
+        .collapsible.visible {
+            max-height: 1000px;
+            visibility: visible;
         }
     </style>
+    <script>
+        function toggleSection(id) {
+            const section = document.getElementById(id);
+            section.classList.toggle('hidden');
+            section.classList.toggle('visible');
+        }
+    </script>
 </head>
 <body>
     <div class="remote">
-        <div class="divider">Main</div>
-        <button class="button"><img src="play.png" alt="play"><span style="z-index: 1;"></span></button>
-        <button class="button"><img src="vol_down.png" alt="vol_down"><span style="z-index: 1;"></span></button>
-        <button class="button"><img src="vol_up.png" alt="vol_up"><span style="z-index: 1;"></span></button>
-        <button class="button"><img src="stop.png" alt="stop"><span style="z-index: 1;"></span></button>
-		<button class="button"><img src="prev.png" alt="prev"><span style="z-index: 1;"></span></button>
-        <button class="button"><img src="next.png" alt="next"><span style="z-index: 1;"></span></button>
-		<div class="divider">Radio</div>
-        <button class="button">1</button>
-        <button class="button">2</button>
-        <button class="button">3</button>
-        <button class="button">4</button>
-        <button class="button">5</button>
-        <button class="button">6</button>
-        <button class="button">7</button>
-        <button class="button">8</button>
-        <button class="button">9</button>
-        <div class="divider">Speaker</div>
-        <button class="button green"><img src="ok-icon.png" alt="OK"><span style="z-index: 1;"> OK</span></button>
-        <button class="button"><img src="volume-down-icon.png" alt="Volume Down"><span style="z-index: 1;"> Vol -</span></button>
-        <button class="button"><img src="channel-down-icon.png" alt="Channel Down"><span style="z-index: 1;"> Ch -</span></button>
-        <div class="divider">Sonstige</div>
-        <button class="button blue"><img src="menu-icon.png" alt="Menu"><span style="z-index: 1;"> Menu</span></button>
-        <button class="button">0</button>
-        <button class="button"><img src="back-icon.png" alt="Back"><span style="z-index: 1;"> Back</span></button>
+        <div class="divider" style="--divider-bg-color: #4a4a4a;" onclick="toggleSection('section-hauptsteuerung')">Hauptsteuerung</div>
+        <div id="section-hauptsteuerung" class="collapsible visible">
+            <button class="button red"><img src="power-icon.png" alt="Power"><span style="z-index: 1;"> Power</span></button>
+            <button class="button"><img src="volume-up-icon.png" alt="Volume Up"><span style="z-index: 1;"> Vol +</span></button>
+            <button class="button"><img src="channel-up-icon.png" alt="Channel Up"><span style="z-index: 1;"> Ch +</span></button>
+        </div>
+        <div class="divider" style="--divider-bg-color: #6c757d;" onclick="toggleSection('section-hauptfunktionen')">Hauptfunktionen</div>
+        <div id="section-hauptfunktionen" class="collapsible visible">
+            <button class="button">1</button>
+            <button class="button">2</button>
+            <button class="button">3</button>
+            <button class="button">4</button>
+            <button class="button">5</button>
+            <button class="button">6</button>
+            <button class="button">7</button>
+            <button class="button">8</button>
+            <button class="button">9</button>
+        </div>
+        <div class="divider" style="--divider-bg-color: #5a6268;" onclick="toggleSection('section-nummerntasten')">Nummerntasten</div>
+        <div id="section-nummerntasten" class="collapsible visible">
+            <button class="button green"><img src="ok-icon.png" alt="OK"><span style="z-index: 1;"> OK</span></button>
+            <button class="button"><img src="volume-down-icon.png" alt="Volume Down"><span style="z-index: 1;"> Vol -</span></button>
+            <button class="button"><img src="channel-down-icon.png" alt="Channel Down"><span style="z-index: 1;"> Ch -</span></button>
+        </div>
+        <div class="divider" style="--divider-bg-color: #343a40;" onclick="toggleSection('section-navigation')">Navigation</div>
+        <div id="section-navigation" class="collapsible hidden">
+            <button class="button blue"><img src="menu-icon.png" alt="Menu"><span style="z-index: 1;"> Menu</span></button>
+            <button class="button">0</button>
+            <button class="button"><img src="back-icon.png" alt="Back"><span style="z-index: 1;"> Back</span></button>
+        </div>
     </div>
 </body>
 </html>
