@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitale Fernbedienung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .remote {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            gap: 10px;
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button {
+            width: 80px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #777;
+        }
+        .button.red {
+            background: #d9534f;
+        }
+        .button.green {
+            background: #5cb85c;
+        }
+        .button.blue {
+            background: #5bc0de;
+        }
+    </style>
+</head>
+<body>
+    <div class="remote">
+        <button class="button green">Play</button>
+        <button class="button red">Stop</button>
+        <button class="button blue">Menu</button>
+        <button class="button">1</button>
+        <button class="button">2</button>
+        <button class="button">3</button>
+        <button class="button">4</button>
+        <button class="button">5</button>
+        <button class="button">6</button>
+        <button class="button">7</button>
+        <button class="button">8</button>
+        <button class="button">9</button>
+        <button class="button">Vol +</button>
+        <button class="button">0</button>
+        <button class="button">Ch +</button>
+        <button class="button">Vol -</button>
+        <button class="button">Back</button>
+        <button class="button">Ch -</button>
+    </div>
+</body>
+</html>
