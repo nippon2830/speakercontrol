@@ -27,6 +27,7 @@ pinPort = [0,1,0,1,0,1,0,1,0,1,0,1];
 speaker_set = sys.argv[1];
 #stateP = sys.argv[2];
 
+# read speaker setting from params
 def getPinPort():
  pinState = gdm.getPins_parameter(speaker_set)
  count = 0
@@ -34,34 +35,9 @@ def getPinPort():
   pinPort[count] = i
   count = count + 1
 
-def setPinPort():
- gdm.setPins(''.join(map(str,pinPort)))
- print ''.join(map(str,pinPort))
-
-def initIP(pinParam):
- if(len(pinParam) > 0):
-  pinPort = pinParam;
- else:
-  pinPort = [];
- init(pinPort); 
-
-def initOP():
-# if(len(sys.argv) > 0):
-#  pinPort = sys.argv[1]; else: pinPort = [];
- init(pinPort); 
-
-def closeAll():
- lowPins = pinList;
- highPins = [];
- setAllPins(highPins, lowPins); 
-
-def openAll():
- lowPins = [];
- highPins = pinList;
- setAllPins(highPins, lowPins);
-
+# choose the correct pin to set in extern method
 def setPin(pin, state):
- init()
+ #?init()
  set = "false"
 # print("pin1: ", pin)
  pinN = int(pin)-1
@@ -83,10 +59,19 @@ def setPin(pin, state):
   if(state == "off"):
    pinPort[pnr] = 0 
    gsm.setPin(pinS,"0")
-  setPinPort()
+  #?setPinPort()
  else:
   print("Wrong Pin or State")
 
+# loop through sortet pins and set high or low
+def setAllPins(highPins,lowPins):
+ pin = 0
+ for i in lowPins:
+  #print("low" ,i);
+  gsm.setPin(i, "0");
+ for j in highPins:
+  #print("high" ,j);
+  gsm.setPin(j, "1");
 
 # loop through pins and sort by high or low
 def initpins(pinCode):
@@ -103,17 +88,7 @@ def initpins(pinCode):
   pin = pin + 1;
  setAllPins(highPins, lowPins)
 
-# loop through sortet pins and set high or low
-def setAllPins(highPins,lowPins):
- pin = 0
- for i in lowPins:
-  #print("low" ,i);
-  gsm.setPin(i, "0");
- for j in highPins:
-  #print("high" ,j);
-  gsm.setPin(j, "1");
-
-# Set all Pins like code
+# Set all Pins like choosen speaker setting
 def init():
  getPinPort()
  if (len(pinPort)) != 12:
@@ -126,5 +101,37 @@ def init():
    print("Quit");
  
 init();
+
 #setPin(int(pinP),stateP)
 #setPinPort();
+
+# not used at the moment
+def initOP():
+ init(pinPort); 
+
+# not used at the moment
+def initIP(pinParam):
+ if(len(pinParam) > 0):
+  pinPort = pinParam;
+ else:
+  pinPort = [];
+ init(pinPort); 
+
+
+# not used at the moment
+def closeAll():
+ lowPins = pinList;
+ highPins = [];
+ setAllPins(highPins, lowPins); 
+
+# not used at the moment
+def openAll():
+ lowPins = [];
+ highPins = pinList;
+ setAllPins(highPins, lowPins);
+
+# save the current speaker setting
+def setPinPort():
+ gdm.setPins(''.join(map(str,pinPort)))
+ print ''.join(map(str,pinPort))
+
