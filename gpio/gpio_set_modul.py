@@ -19,12 +19,14 @@ def setPin(pin,state):
   GPIO.setup(pin, GPIO.IN)
   #print("Pin:", pin, ":", state, " LOW"); 
 
+#wird aktuell nicht verwendet
 def main(pin,state):
  if(state == "s"):
   getStatus(pin);
  else:
   setPin(pin,state); 
 
+#wird aktuell nicht verwendet
 def getStatus(pin):
  try:
   with open("/sys/class/gpio/gpio2/direction") as pin:

@@ -1,6 +1,6 @@
 #return selected pins from file
 def getPins_parameter(setting):
- filepath = ('/home/pi/gpio/gpio_pins_list.per')
+ filepath = ('/home/pi/gpio/gpio_pins.lst')
  with open(filepath) as fp:
    line = fp.readline()
    cnt = 1

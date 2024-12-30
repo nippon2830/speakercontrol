@@ -1,17 +1,36 @@
 #!/usr/bin/python
 #import required Python libraries
-import time, re, string, sys, array;
-import subprocess
+import sys, subprocess;
 
+volume_param = 60;
 
-volume_param = sys.argv[1];
-volume_set = "40"
+if len(sys.argv) > 1:
+    volume_param = sys.argv[1];
+
 program = "amixer"
-line = "-q -M sset PCM " + volume_param +"%"
+program_param = "-q -M sset PCM "
+program_post = "%"
 
+#write pin to file
+def setVolume(vol_set):
+ fobj_out = open("/home/pi/gpio/gpio_volume.per","w")
+ fobj_out.write(vol_set)
+ fobj_out.close()
+
+#read and return pin from file
+def getVolume():
+ fobj = open("/home/pi/gpio/gpio_volume.per")
+ for line in fobj:
+   return line.rstrip()
+ fobj.close()
+
+def init_p(vol_set):
+ setVolume(vol_set)
+ init()
 
 def init():
+ line = program_param + getVolume() + program_post
  subprocess.Popen([program]+line.split())
- print(volume_param);
+ #print(line)
 
-init();
+init_p(volume_param);
