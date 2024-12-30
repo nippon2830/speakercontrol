@@ -4,7 +4,7 @@ import subprocess,sys
 import gpio_mpc_modul as mpc
 import gpio_vol_modul as vol
 
-param_url = 1;
+param_url = "1";
 
 if len(sys.argv) > 1:
     param_url = sys.argv[1];

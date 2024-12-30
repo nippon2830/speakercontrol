@@ -11,11 +11,14 @@
 11 gäste wc
 12 wohnzimmer
 
-1 ohne Kinder
-2 alle
-3 nur ganz oben
-4 ohne ganz oben
-5 nicht unten
+1 alle
+2 ohne Kinder
+3 nur Kinder
+4 nur DG
+5 ohne DG
+6 nur unten
+7 nicht unten
+
 
 
 /root/.sdkman/candidates/groovy/2.4.13/lib/

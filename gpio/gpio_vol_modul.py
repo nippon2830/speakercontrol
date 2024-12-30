@@ -2,7 +2,7 @@
 #import required Python libraries
 import sys, subprocess;
 
-volume_param = 60;
+volume_param = "80";
 
 if len(sys.argv) > 1:
     volume_param = sys.argv[1];

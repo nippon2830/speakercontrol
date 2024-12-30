@@ -3,7 +3,7 @@
 import RPi.GPIO as GPIO 
 import gpio_set_modul as gsm 
 import gpio_data_modul as gdm
-import time, re, string, sys, array;
+import sys;
 
 # Use BCM GPIO references instead of physical pin numbers
 
@@ -31,7 +31,7 @@ if len(sys.argv) > 1:
 
 # read speaker setting from params
 def getPinPort():
- pinState = gdm.getPins_parameter(speaker_set)
+ pinState = gdm.getPins()
  count = 0
  for i in str(pinState):
   pinPort[count] = i
@@ -61,7 +61,6 @@ def setPin(pin, state):
   if(state == "off"):
    pinPort[pnr] = 0 
    gsm.setPin(pinS,"0")
-  #?setPinPort()
  else:
   print("Wrong Pin or State")
 
@@ -90,7 +89,6 @@ def initpins(pinCode):
   pin = pin + 1;
  setAllPins(highPins, lowPins)
 
-# Set all Pins like choosen speaker setting
 def init():
  getPinPort()
  if (len(pinPort)) != 12:
@@ -101,13 +99,18 @@ def init():
    initpins(pinPort);
   except KeyboardInterrupt:
    print("Quit");
+
+# Set all Pins like choosen speaker setting
+def init_p(speaker_param):
+ gdm.getPins_parameter(speaker_param)
+ init()
  
-init();
+init_p(speaker_set);
 
 #setPin(int(pinP),stateP)
 #setPinPort();
 
-# used for server only
+# used for old server only
 def initIP(pinParam):
  if(len(pinParam) > 0):
   pinPort = pinParam;
@@ -127,9 +130,3 @@ def openAll():
  lowPins = [];
  highPins = pinList;
  setAllPins(highPins, lowPins);
-
-# save the current speaker setting
-def setPinPort():
- gdm.setPins(''.join(map(str,pinPort)))
- print ''.join(map(str,pinPort))
-

@@ -4,28 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digitale Fernbedienung</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
             background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            height: 100vh;
+            overflow: auto;
         }
         .remote {
             display: grid;
-            grid-template-columns: repeat(3, 80px);
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
             gap: 10px;
             background: #333;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: max-content;
+            width: 100%;
+            max-width: 400px;
         }
         .button {
-            width: 80px;
+            width: 100%;
             height: 80px;
             display: flex;
             justify-content: center;
@@ -40,7 +44,7 @@
             position: relative;
             overflow: hidden;
         }
-        .button img {
+        .button.img {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -60,8 +64,14 @@
         .button.blue {
             background: #5bc0de;
         }
-        .divider {
+        .button.active {
+            background: #f0ad4e;
+        }
+        .button.wide {
             grid-column: span 3;
+        }
+        .divider {
+            grid-column: 1 / -1;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -76,7 +86,7 @@
         }
         .collapsible {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
             gap: 10px;
             transition: max-height 0.3s ease-out, visibility 0.3s ease-out;
             overflow: hidden;
@@ -96,39 +106,47 @@
             section.classList.toggle('hidden');
             section.classList.toggle('visible');
         }
+
+        function toggleButton(button) {
+            button.classList.toggle('active');
+            const isActive = button.classList.contains('active');
+            const value = isActive ? 'on' : 'off';
+            console.log(`Button value: ${value}`);
+            button.dataset.state = value;
+        }
     </script>
 </head>
 <body>
     <div class="remote">
         <div class="divider" style="--divider-bg-color: #4a4a4a;" onclick="toggleSection('section-hauptsteuerung')">Hauptsteuerung</div>
         <div id="section-hauptsteuerung" class="collapsible visible">
-            <button class="button red"><img src="power-icon.png" alt="Power"><span style="z-index: 1;"> Power</span></button>
-            <button class="button"><img src="volume-up-icon.png" alt="Volume Up"><span style="z-index: 1;"> Vol +</span></button>
-            <button class="button"><img src="channel-up-icon.png" alt="Channel Up"><span style="z-index: 1;"> Ch +</span></button>
+            <button class="button red wide" onclick="toggleButton(this)" data-state="off"><img src="power-icon.png" alt="Power"><span style="z-index: 1;"> Power</span></button>
+            <button class="button" onclick="toggleButton(this)" data-state="off"><img src="volume-up-icon.png" alt="Volume Up"><span style="z-index: 1;"> Vol +</span></button>
+            <button class="button" onclick="toggleButton(this)" data-state="off"><img src="channel-up-icon.png" alt="Channel Up"><span style="z-index: 1;"> Ch +</span></button>
         </div>
         <div class="divider" style="--divider-bg-color: #6c757d;" onclick="toggleSection('section-hauptfunktionen')">Hauptfunktionen</div>
         <div id="section-hauptfunktionen" class="collapsible visible">
-            <button class="button">1</button>
-            <button class="button">2</button>
-            <button class="button">3</button>
-            <button class="button">4</button>
-            <button class="button">5</button>
-            <button class="button">6</button>
-            <button class="button">7</button>
-            <button class="button">8</button>
-            <button class="button">9</button>
+            <button class="button" onclick="toggleButton(this)" data-state="off">1</button>
+            <button class="button" onclick="toggleButton(this)" data-state="off">2</button>
+            <button class="button" onclick="toggleButton(this)" data-state="off">3</button>
+            <button class="button" onclick="toggleButton(this)" data-state="off">4</button>
+            <button class="button" onclick="toggleButton(this)" data-state="off">5</button>
+            <button class="button" onclick="toggleButton(this)" data-state="off">6</button>
+            <button class="button" onclick="toggleButton(this)" data-state="off">7</button>
+            <button class="button" onclick="toggleButton(this)" data-state="off">8</button>
+            <button class="button" onclick="toggleButton(this)" data-state="off">9</button>
         </div>
         <div class="divider" style="--divider-bg-color: #5a6268;" onclick="toggleSection('section-nummerntasten')">Nummerntasten</div>
         <div id="section-nummerntasten" class="collapsible visible">
-            <button class="button green"><img src="ok-icon.png" alt="OK"><span style="z-index: 1;"> OK</span></button>
-            <button class="button"><img src="volume-down-icon.png" alt="Volume Down"><span style="z-index: 1;"> Vol -</span></button>
-            <button class="button"><img src="channel-down-icon.png" alt="Channel Down"><span style="z-index: 1;"> Ch -</span></button>
+            <button class="button green" onclick="toggleButton(this)" data-state="off"><img src="ok-icon.png" alt="OK"><span style="z-index: 1;"> OK</span></button>
+            <button class="button" onclick="toggleButton(this)" data-state="off"><img src="volume-down-icon.png" alt="Volume Down"><span style="z-index: 1;"> Vol -</span></button>
+            <button class="button" onclick="toggleButton(this)" data-state="off"><img src="channel-down-icon.png" alt="Channel Down"><span style="z-index: 1;"> Ch -</span></button>
         </div>
         <div class="divider" style="--divider-bg-color: #343a40;" onclick="toggleSection('section-navigation')">Navigation</div>
         <div id="section-navigation" class="collapsible hidden">
-            <button class="button blue"><img src="menu-icon.png" alt="Menu"><span style="z-index: 1;"> Menu</span></button>
-            <button class="button">0</button>
-            <button class="button"><img src="back-icon.png" alt="Back"><span style="z-index: 1;"> Back</span></button>
+            <button class="button blue" onclick="toggleButton(this)" data-state="off"><img src="menu-icon.png" alt="Menu"><span style="z-index: 1;"> Menu</span></button>
+            <button class="button" onclick="toggleButton(this)" data-state="off">0</button>
+            <button class="button" onclick="toggleButton(this)" data-state="off"><img src="back-icon.png" alt="Back"><span style="z-index: 1;"> Back</span></button>
         </div>
     </div>
 </body>

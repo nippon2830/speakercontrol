@@ -7,7 +7,8 @@ def getPins_parameter(setting):
    while line:
        if cnt == int(setting):
         sl = line.strip()
-        print("Line {}: {}".format(cnt, sl))
+        #print("Line {}: {}".format(cnt, sl))
+        setPins(sl)
         return sl
        else:
 	line = fp.readline()

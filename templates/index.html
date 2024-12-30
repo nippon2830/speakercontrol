@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digitale Fernbedienung</title>
+	<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
+			margin: 0;            
+			display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            align-items: flex-start;
+            padding: 20px;            height: 100vh;
             background-color: #f4f4f4;
+            height: 100vh;
+            overflow: auto;
         }
         .remote {
             display: grid;
@@ -24,7 +27,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .button {
-            width: 80px;
+            width: 100%;
             height: 80px;
             display: flex;
             justify-content: center;
@@ -59,6 +62,9 @@
         .button.blue {
             background: #5bc0de;
         }
+		.button.wide {
+            grid-column: span 3;
+        }
         .divider {
             grid-column: span 3;
             display: flex;
@@ -83,21 +89,25 @@
 		<button class="button"><img src="/static/prev.png" alt="prev"><span style="z-index: 1;"></span></button>
         <button class="button"><img src="/static/next.png" alt="next"><span style="z-index: 1;"></span></button>
 		<div class="divider">Radio</div>
-        <button class="button">1</button>
-        <button class="button">2</button>
-        <button class="button">3</button>
-        <button class="button">4</button>
-        <button class="button">5</button>
-        <button class="button">6</button>
+        <button class="button"><a href="/gpio/radio/1"><img src="/static/bremeneins.png" alt="1"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/radio/2"><img src="/static/radio_bob.png" alt="1"><span style="z-index: 1;"></span></a></button>
+        <button class="button"><a href="/gpio/radio/3"><img src="/static/90s_nrw.png" alt="3"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/radio/4"><img src="/static/90s_inthemix.png" alt="4"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/radio/5"><img src="/static/90s_hits.png" alt="5"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/radio/6"><img src="/static/90s_rock.png" alt="6"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/radio/7"><img src="/static/90s_hiphoprap.png" alt="7"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/radio/8"><img src="/static/90s_hiphop.png" alt="8"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/radio/9"><img src="/static/90s_house.png" alt="9"><span style="z-index: 1;"></span></a></button>
         <div class="divider">Speaker</div>
-        <button class="button">1</button>
-        <button class="button">2</button>
-        <button class="button">3</button>
-        <button class="button">4</button>
-        <button class="button">5</button>
-        <button class="button">6</button>
+        <button class="button wide"><a href="/gpio/speaker/1"><img src="/static/house_all.png" alt="1"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/speaker/2"><img src="/static/house_no_kids.png" alt="2"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/speaker/3"><img src="/static/house_just_kids.png" alt="3"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/speaker/4"><img src="/static/house_just_dg.png" alt="4"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/speaker/5"><img src="/static/house_no_dg.png" alt="5"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/speaker/6"><img src="/static/house_just_eg.png" alt="6"><span style="z-index: 1;"></span></a></button>
+		<button class="button"><a href="/gpio/speaker/7"><img src="/static/house_no_eg.png" alt="7"><span style="z-index: 1;"></span></a></button>
         <div class="divider">Sonstige</div>
-        <button class="button"><img src="power.png" alt="power"><span style="z-index: 1;"> </span></button>
+        <button class="button"><img src="/static/power.png" alt="power"><span style="z-index: 1;"> </span></button>
     </div>
 </body>
 </html>
