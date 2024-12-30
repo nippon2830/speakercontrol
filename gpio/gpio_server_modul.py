@@ -7,6 +7,7 @@ from contextlib import closing
 import gpio_mpc_modul as mpc
 import gpio_data_url_modul as radio
 import gpio_main_modul as speaker
+import gpio_vol_modul as volume
 from flask import Flask, render_template, jsonify 
 
 app = Flask(__name__)
@@ -14,7 +15,6 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
-
 
 @app.route("/gpio/play") 
 def play():
@@ -24,6 +24,16 @@ def play():
 @app.route("/gpio/stop") 
 def stop():
     mpc.stop()
+    return render_template('index.html')
+
+@app.route("/gpio/vol_up") 
+def vol_up():
+    volume.vol_Up()
+    return render_template('index.html')
+
+@app.route("/gpio/vol_down") 
+def vol_down():
+    volume.vol_Down()
     return render_template('index.html')
 
 @app.route("/gpio/radio/1") 

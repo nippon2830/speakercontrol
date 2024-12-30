@@ -24,6 +24,18 @@ def getVolume():
    return line.rstrip()
  fobj.close()
 
+def vol_Up():
+ vol_now = int(getVolume())
+ if vol_now < 91: 
+  vol_new = vol_now + 10
+  init_p(str(vol_new))
+
+def vol_Down():
+ vol_now = int(getVolume())
+ if vol_now > 10: 
+  vol_new = vol_now - 10
+  init_p(str(vol_new))
+
 def init_p(vol_set):
  setVolume(vol_set)
  init()
@@ -33,4 +45,4 @@ def init():
  subprocess.Popen([program]+line.split())
  #print(line)
 
-init_p(volume_param);
+#init_p(volume_param);
