@@ -8,10 +8,9 @@ def getPins_parameter(setting):
        if cnt == int(setting):
         sl = line.strip()
         #print("Line {}: {}".format(cnt, sl))
-        setPins(sl)
         return sl
        else:
-	line = fp.readline()
+        line = fp.readline()
         cnt += 1
 
 #write pin to file

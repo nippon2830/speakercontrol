@@ -20,9 +20,11 @@ def getInfo():
  fobj.close()
 
 def init():
- print(mpc.info("name"))
- print(mpc.info("title"))
- print(vol.getVolume() + "%")
- print(gdm.getPins())
+ i_radio = (mpc.info("name")).rstrip('\n')
+ i_title = (mpc.info("title")).rstrip('\n')
+ i_volume = (vol.getVolume() + "%")
+ i_pins = (gdm.getPins())
+ setInfo(i_radio + ";" + i_title + ";" + i_volume + ";" + i_pins)
+ print(getInfo())
 
 init();

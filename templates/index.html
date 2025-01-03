@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digitale Fernbedienung</title>
 	<link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-    <style>
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/static/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon.ico">
+	<link rel="apple-touch-icon" sizes="167x167" href="/static/favicon.ico">
+	<style>
         body {
             font-family: Arial, sans-serif;
 			margin: 0;            
@@ -78,16 +82,32 @@
             border-radius: 5px;
         }
     </style>
+	<script>
+        function toggleSection(id) {
+            const section = document.getElementById(id);
+            section.classList.toggle('hidden');
+            section.classList.toggle('visible');
+        }
+
+        function toggleButton(button) {
+            button.classList.toggle('active');
+            const isActive = button.classList.contains('active');
+            const value = isActive ? 'on' : 'off';
+            console.log(`Button value: ${value}`);
+            button.dataset.state = value;
+        }
+    </script>
 </head>
 <body>
     <div class="remote">
-        <div class="divider">Main</div>
-        <button class="button"><a href="/gpio/play"><img src="/static/play.png" alt="play"><span style="z-index: 1;"></span></a></button>
-        <button class="button"><a href="/gpio/vol_down"><img src="/static/vol_down.png" alt="vol_down"><span style="z-index: 1;"></span></a></button>
-        <button class="button"><a href="/gpio/vol_up"><img src="/static/vol_up.png" alt="vol_up"><span style="z-index: 1;"></span></a></button>
-        <button class="button"><a href="/gpio/stop"><img src="/static/stop.png" alt="stop"><span style="z-index: 1;"></span></a></button>
-		<button class="button"><img src="/static/prev.png" alt="prev"><span style="z-index: 1;"></span></button>
-        <button class="button"><img src="/static/next.png" alt="next"><span style="z-index: 1;"></span></button>
+        <div class="divider">Hauptfunktionen</div>
+			<button class="button"><a href="/gpio/play"><img src="/static/play.png" alt="play"><span style="z-index: 1;"></span></a></button>
+			<button class="button"><a href="/gpio/vol_down"><img src="/static/vol_down.png" alt="vol_down"><span style="z-index: 1;"></span></a></button>
+			<button class="button"><a href="/gpio/vol_up"><img src="/static/vol_up.png" alt="vol_up"><span style="z-index: 1;"></span></a></button>
+			<button class="button"><a href="/gpio/stop"><img src="/static/stop.png" alt="stop"><span style="z-index: 1;"></span></a></button>
+			<button class="button"><img src="/static/prev.png" alt="prev"><span style="z-index: 1;"></span></button>
+			<button class="button"><img src="/static/next.png" alt="next"><span style="z-index: 1;"></span></button>
+
 		<div class="divider">Radio</div>
         <button class="button"><a href="/gpio/radio/1"><img src="/static/bremeneins.png" alt="1"><span style="z-index: 1;"></span></a></button>
 		<button class="button"><a href="/gpio/radio/2"><img src="/static/radio_bob.png" alt="1"><span style="z-index: 1;"></span></a></button>

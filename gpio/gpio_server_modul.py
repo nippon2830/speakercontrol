@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import shelve 
 from os import path 
-from cPickle import HIGHEST_PROTOCOL 
 from contextlib import closing 
 
 import gpio_mpc_modul as mpc
@@ -117,4 +116,4 @@ def speaker_7():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=80)
+    app.run(debug=False, host='0.0.0.0', port=5000)
