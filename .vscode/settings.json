@@ -1,0 +1,18 @@
+{    
+    "deploy": {
+        "targets": [
+            {
+                "type": "sftp",
+                "name": "speakerpi",
+                "description": "Speaker GPIO",
+                "dir": "/home/pi/gpio/"
+                "host": "speakerpi",
+                "engine": "ftp",
+                "port": 22,                
+                "secure": true,
+                "user": "pi",
+                "password": "raspberry"  // leave blank: prompt
+            }
+        ]
+    }
+}

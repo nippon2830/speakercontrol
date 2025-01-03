@@ -118,7 +118,6 @@ def initIP(pinParam):
   pinPort = [];
  init(); 
 
-
 # not used at the moment
 def closeAll():
  lowPins = pinList;
