@@ -81,6 +81,36 @@
             margin: 10px 0;
             border-radius: 5px;
         }
+        .collapsible {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            transition: max-height 0.3s ease-out, visibility 0.3s ease-out;
+            overflow: hidden;
+        }
+        .collapsible.hidden {
+            max-height: 0;
+            visibility: hidden;
+        }
+        .collapsible.visible {
+            max-height: 1000px;
+            visibility: visible;
+        }
+        .infobox {
+            grid-column: 1 / -1;
+            background: #222;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .infobox span {
+            display: block;
+            margin-bottom: 5px;
+        }
     </style>
 	<script>
         function toggleSection(id) {
@@ -96,10 +126,48 @@
             console.log(`Button value: ${value}`);
             button.dataset.state = value;
         }
+        
+        async function updateInfoBox() {
+            try {
+                const response = await fetch('http://speakerpi:5000/gpio/info');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const infobox = document.querySelector('.infobox');
+                infobox.innerHTML = `
+                    <span>${data.radio || 'Zeile 1: Keine Daten'}</span>
+                    <span>${data.title || 'Zeile 2: Keine Daten'}</span>
+                    <span>${data.volume || 'Zeile 3: Keine Daten'}</span>
+                    <span>${data.pins || 'Zeile 4: Keine Daten'}</span>
+                `;
+            } catch (error) {
+                console.error('Error updating infobox:', error);
+                const infobox = document.querySelector('.infobox');
+                infobox.innerHTML = `
+                    <span>Zeile 1: Fehler beim Laden</span>
+                    <span>Zeile 2: Bitte prüfen Sie die Verbindung</span>
+                    <span>Zeile 3: -</span>
+                    <span>${error}</span>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateInfoBox();
+            setInterval(updateInfoBox, 10000); // 60 Minuten in Millisekunden
+        });
+
     </script>
 </head>
 <body>
     <div class="remote">
+        <div class="infobox">
+            <span>Zeile 1: Status</span>
+            <span>Zeile 2: Modus</span>
+            <span>Zeile 3: Verbindung</span>
+            <span>Zeile 4: Batterie</span>
+        </div>
         <div class="divider">Hauptfunktionen</div>
 			<button class="button"><a href="/gpio/play"><img src="/static/play.png" alt="play"><span style="z-index: 1;"></span></a></button>
 			<button class="button"><a href="/gpio/vol_down"><img src="/static/vol_down.png" alt="vol_down"><span style="z-index: 1;"></span></a></button>

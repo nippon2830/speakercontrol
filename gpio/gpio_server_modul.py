@@ -7,6 +7,7 @@ import gpio_mpc_modul as mpc
 import gpio_data_url_modul as radio
 import gpio_main_modul as speaker
 import gpio_vol_modul as volume
+import gpio_info_modul as info
 from flask import Flask, render_template, jsonify 
 
 app = Flask(__name__)
@@ -34,6 +35,12 @@ def vol_up():
 def vol_down():
     volume.vol_Down()
     return render_template('index.html')
+
+@app.route("/gpio/info") 
+def info_out():
+    info_text = info.getInfoJson()
+    return jsonify(info_text)
+    #return render_template('index.html')
 
 @app.route("/gpio/radio/1") 
 def radio_1():

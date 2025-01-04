@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #import required Python libraries
-import sys, subprocess;
+import sys, subprocess,json;
 import gpio_mpc_modul as mpc
 import gpio_vol_modul as vol
 import gpio_data_modul as gdm
@@ -19,12 +19,17 @@ def getInfo():
    return line.rstrip()
  fobj.close()
 
+def getInfoJson():
+  return json.loads(getInfo())
+  
+
 def init():
- i_radio = (mpc.info("name")).rstrip('\n')
- i_title = (mpc.info("title")).rstrip('\n')
- i_volume = (vol.getVolume() + "%")
- i_pins = (gdm.getPins())
- setInfo(i_radio + ";" + i_title + ";" + i_volume + ";" + i_pins)
+ i_radio = mpc.info("name").rstrip('\n')
+ i_title = mpc.info("title").rstrip('\n')
+ i_volume = vol.getVolume() + "%"
+ i_pins = gdm.getPins()
+ json_string = '{"radio": "' + i_radio + '", "title": "' + i_title + '", "volume": "' + i_volume + '", "pins": "' + i_pins + '"}'
+ setInfo(json_string)
  print(getInfo())
 
 init();
