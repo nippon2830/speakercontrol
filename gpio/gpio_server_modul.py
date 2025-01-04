@@ -42,6 +42,16 @@ def info_out():
     return jsonify(info_text)
     #return render_template('index.html')
 
+@app.route("/gpio/radio/prev") 
+def prev():
+    radio.prev()
+    return render_template('index.html')
+
+@app.route("/gpio/radio/next") 
+def next():
+    radio.next()
+    return render_template('index.html')
+
 @app.route("/gpio/radio/1") 
 def radio_1():
     radio.init_p("1")
@@ -123,4 +133,4 @@ def speaker_7():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=80)

@@ -36,6 +36,22 @@ def getUrl():
    return line.rstrip()
  fobj.close()
 
+def next():
+ url_now = int(getUrl())
+ if url_now < 9: 
+  url_new = url_now + 1
+ else:
+  url_new = 1 
+ init_p(str(url_new))
+
+def prev():
+ url_now = int(getUrl())
+ if url_now > 2: 
+  url_new = url_now - 1
+ else:
+  url_new = 9
+ init_p(str(url_new))
+
 def init_p(new_url):
  setUrl(new_url)
  init()

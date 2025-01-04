@@ -129,7 +129,7 @@
         
         async function updateInfoBox() {
             try {
-                const response = await fetch('http://speakerpi:5000/gpio/info');
+                const response = await fetch('http://speakerpi/gpio/info');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -173,8 +173,8 @@
 			<button class="button"><a href="/gpio/vol_down"><img src="/static/vol_down.png" alt="vol_down"><span style="z-index: 1;"></span></a></button>
 			<button class="button"><a href="/gpio/vol_up"><img src="/static/vol_up.png" alt="vol_up"><span style="z-index: 1;"></span></a></button>
 			<button class="button"><a href="/gpio/stop"><img src="/static/stop.png" alt="stop"><span style="z-index: 1;"></span></a></button>
-			<button class="button"><img src="/static/prev.png" alt="prev"><span style="z-index: 1;"></span></button>
-			<button class="button"><img src="/static/next.png" alt="next"><span style="z-index: 1;"></span></button>
+			<button class="button"><a href="/gpio/radio/prev"><img src="/static/prev.png" alt="prev"><span style="z-index: 1;"></span></a></button>
+			<button class="button"><a href="/gpio/radio/next"><img src="/static/next.png" alt="next"><span style="z-index: 1;"></span></a></button>
 
 		<div class="divider">Radio</div>
         <button class="button"><a href="/gpio/radio/1"><img src="/static/bremeneins.png" alt="1"><span style="z-index: 1;"></span></a></button>
