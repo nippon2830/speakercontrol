@@ -20,20 +20,20 @@ def setPin(pin,state):
   #print("Pin:", pin, ":", state, " LOW"); 
 
 #wird aktuell nicht verwendet
-#def main(pin,state):
-# if(state == "s"):
-#  getStatus(pin);
-# else:
-#  setPin(pin,state); 
+def main(pin,state):
+ if(state == "s"):
+  getStatus(pin);
+ else:
+  setPin(pin,state); 
 
 #wird aktuell nicht verwendet
-#def getStatus(pin):
- #try:
- # with open("/sys/class/gpio/gpio2/direction") as pin:
- #   status = pin.read(1)
- #except:
- # print "Remember to export the pin first!"
- # status = "Unknown"
- #print status
+def getStatus(pin):
+ try:
+  with open("/sys/class/gpio/gpio2/direction") as pin:
+    status = pin.read(1)
+ except:
+  print("Remember to export the pin first!")
+  status = "Unknown"
+ # print status
   
 #main(int(pinP),stateP);
