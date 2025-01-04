@@ -40,3 +40,8 @@ amixer -q -M sset PCM 85%
 
 https://wiki.ubuntuusers.de/mpg123/
 
+Log service
+journalctl -n 50 -f
+
+ps -ef | grep python
+systemctl stop speakerpi

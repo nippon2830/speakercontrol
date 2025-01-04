@@ -1,13 +1,13 @@
 #return selected pins from file
-def getPins_parameter(setting):
+def getPins_parameter():
  filepath = ('/home/pi/gpio/gpio_pins.lst')
  with open(filepath) as fp:
    line = fp.readline()
    cnt = 1
    while line:
-       if cnt == int(setting):
+       if cnt == int(getPins()):
         sl = line.strip()
-        setPins(sl)
+        setPins(str(cnt))
         #print("Line {}: {}".format(cnt, sl))
         return sl
        else:
@@ -26,7 +26,6 @@ def getPins():
  for line in fobj:
    return line.rstrip()
  fobj.close()
-
 
 #setPins("000011110000")
 #getPins_parameter(4)

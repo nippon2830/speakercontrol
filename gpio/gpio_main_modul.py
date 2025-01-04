@@ -22,7 +22,7 @@ pinPort = [0,1,0,1,0,1,0,1,0,1,0,1];
 #----------------------# 
 
 
-speaker_set = 2;
+speaker_set = "2";
 
 if len(sys.argv) > 1:
     speaker_set = sys.argv[1];
@@ -31,7 +31,7 @@ if len(sys.argv) > 1:
 
 # read speaker setting from params
 def getPinPort():
- pinState = gdm.getPins()
+ pinState = gdm.getPins_parameter()
  count = 0
  for i in str(pinState):
   pinPort[count] = i
@@ -102,7 +102,7 @@ def init():
 
 # Set all Pins like choosen speaker setting
 def init_p(speaker_param):
- gdm.getPins_parameter(speaker_param)
+ gdm.setPins(speaker_param)
  init()
  
 init_p(speaker_set);
