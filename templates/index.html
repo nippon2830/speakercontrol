@@ -136,19 +136,19 @@
                 const data = await response.json();
                 const infobox = document.querySelector('.infobox');
                 infobox.innerHTML = `
-                    <span>${data.radio || 'Zeile 1: Keine Daten'}</span>
-                    <span>${data.title || 'Zeile 2: Keine Daten'}</span>
-                    <span>${data.volume || 'Zeile 3: Keine Daten'}</span>
-                    <span>${data.pins || 'Zeile 4: Keine Daten'}</span>
+                    <span>${data.radio || 'Keine Daten'}</span>
+                    <span>${data.title || 'Keine Daten'}</span>
+                    <span>${data.volume || 'Keine Daten'}</span>
+                    <span>${data.pins || 'Keine Daten'}</span>
                 `;
             } catch (error) {
                 console.error('Error updating infobox:', error);
                 const infobox = document.querySelector('.infobox');
                 infobox.innerHTML = `
-                    <span>Zeile 1: Fehler beim Laden</span>
-                    <span>Zeile 2: Bitte prüfen Sie die Verbindung</span>
-                    <span>Zeile 3: -</span>
+                    <span>Fehler beim Laden</span>
                     <span>${error}</span>
+                    <span></span>
+                    <span></span>
                 `;
             }
         }
